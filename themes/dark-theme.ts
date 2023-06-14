@@ -4,5 +4,11 @@ export const darkTheme = createTheme({
     palette: {
         mode: 'dark',
     },
-    components: {}
+    components: {
+        MuiAppBar: {
+            defaultProps: {
+                elevation: 0
+            }
+        }
+    }
 });

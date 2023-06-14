@@ -4,5 +4,11 @@ export const lightTheme = createTheme({
     palette: {
         mode: 'light',
     },
-    components: {}
+    components: {
+        MuiAppBar: {
+            defaultProps: {
+                elevation: 0
+            }
+        }
+    }
 });
