@@ -1,6 +1,14 @@
+"use client";
+
 import './globals.css'
+
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
+
+import { ThemeProvider, Box } from '@mui/material'
+import { lightTheme, darkTheme } from '../themes'
+import NavBar from '@/components/NavBar/NavBar';
+import SideBar from '@/components/SideBar/SideBar';
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -25,7 +33,15 @@ export default function RootLayout({
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <body className={inter.className}>
-        {children}
+        <ThemeProvider theme={ darkTheme }>
+          <Box sx={{ flexFlow: 1 }}>
+            <NavBar/>
+            <SideBar/>
+            <Box sx={{ padding: '10px 20px' }}>
+              {children}
+            </Box>
+          </Box>
+        </ThemeProvider>
       </body>
     </html>
   )
