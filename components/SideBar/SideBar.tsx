@@ -7,7 +7,7 @@ const menuItems: string[] = ['Inbox', 'Starred', 'Send email', 'Drafts'];
 
 export default function SideBar() {
     return (
-        <Drawer anchor="left" open={useStore(state => state.isSideBarOpen)} onClose={() => console.log("close")}>
+        <Drawer anchor="left" open={useStore(state => state.isSideBarOpen)} onClose={useStore(state => state.toggleSideBar)}>
             <Box sx={{ width: 250 }}>
                 <Box sx={{ padding: '5px 10px', width: 250 }}>
                     <Typography variant="h4">Menú</Typography>

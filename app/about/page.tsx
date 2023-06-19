@@ -5,7 +5,7 @@ export const metadata: Metadata = {
     description: 'This is my about page',
 }
 
-export default function Home() {
+export default function About() {
     return (
         <main>
         <h1> About Page !</h1>
