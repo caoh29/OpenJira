@@ -3,11 +3,11 @@ import { v4 as uuidv4 } from "uuid";
 
 
 export interface Task {
-    id: uuidv4;
+    id: string;
     title: string;
     description: string;
     status: Status;
-    date: number;
+    date: string;
 }
 
 export type Status = "pending" | "in-progress" | "finished";
@@ -18,7 +18,7 @@ export const useStore = create<{
     tasks: Task[];
     toggleDarkMode: () => void;
     toggleSideBar: () => void;
-    addTask: (task) => void;
+    addTask: (task:Task) => void;
     }>
 
     ((set) => ({
@@ -30,21 +30,21 @@ export const useStore = create<{
                 title: "Task 1",
                 description: "Task 1 description",
                 status: "pending",
-                date: Date.now()
+                date: "some date 1"
             },
             {
                 id: uuidv4(),
                 title: "Task 2",
                 description: "Task 2 description",
                 status: "in-progress",
-                date: Date.now()
+                date: "some date 2"
             },
             {
                 id: uuidv4(),
-                title: "Task 2",
+                title: "Task 3",
                 description: "Task 3 description",
                 status: "finished",
-                date: Date.now()
+                date: "some date 3"
             },
         ],
 
