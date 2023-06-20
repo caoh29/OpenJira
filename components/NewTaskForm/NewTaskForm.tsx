@@ -12,12 +12,12 @@ type Inputs = {
 
 export default function NewTaskForm () {
 
-    const [isAdding, setisAdding] = useState(false);
+    const [isAdding, setIsAdding] = useState(false);
 
     const { register, handleSubmit, reset, formState } = useForm<Inputs>();
     const onSubmitForm: SubmitHandler<Inputs> = data => {
         console.log(data)
-        setisAdding(false);
+        setIsAdding(false);
     };
 
     useEffect(() => {
@@ -30,16 +30,46 @@ export default function NewTaskForm () {
         <Box sx={{marginBottom: 2, paddingX: 1}}>
             {isAdding ? (
                 <form onSubmit={handleSubmit(onSubmitForm)}>
-                    <OutlinedInput placeholder="Title" {...register("title", { required: true, minLength: 3 })} fullWidth/>
+                    <OutlinedInput 
+                        {...register("title", { required: true, minLength: 3 })}
+                        placeholder="Title"
+                        fullWidth
+                    />
                     {formState.errors.title && <span>This field is required! Minimum 3 characters</span>}
-                    <OutlinedInput sx={{margin: '20px 0'}} placeholder="Description" {...register("description", { minLength: 3 })} fullWidth/>
+
+                    <OutlinedInput 
+                        sx={{margin: '20px 0'}} 
+                        {...register("description", { minLength: 3 })}
+                        placeholder="Description"  
+                        fullWidth
+                    />
                     {formState.errors.description && <span>This field has a minimum of 3 characters</span>}
+
                     <Box display="flex" gap={5} justifyContent="center" alignItems="center" width="100%">
-                        <OutlinedInput sx={{height: '35px', width: '110px'}} type="submit" value="SAVE " color="primary" endAdornment={<SaveOutlinedIcon/>}/>
-                        <Button variant="outlined" color="secondary" endIcon={<CancelOutlinedIcon/>} onClick={() => setisAdding(false)}> Cancel </Button>
+                        <OutlinedInput 
+                            sx={{height: '35px', width: '110px'}} 
+                            type="submit" 
+                            value="SAVE " 
+                            color="primary" 
+                            endAdornment={<SaveOutlinedIcon/>}
+                        />
+                        <Button 
+                            variant="outlined" 
+                            color="secondary" 
+                            endIcon={<CancelOutlinedIcon/>} 
+                            onClick={() => setIsAdding(false)}> 
+                                Cancel 
+                        </Button>
                     </Box>
                 </form>
-            ): <Button sx={{marginBottom: '20px'}} startIcon={<AddIcon/>} fullWidth variant="outlined" onClick={() => setisAdding(true)}> Add Task </Button>}
+            ): <Button 
+                    sx={{marginBottom: '20px'}} 
+                    startIcon={<AddIcon/>} 
+                    fullWidth 
+                    variant="outlined" 
+                    onClick={() => setIsAdding(true)}> 
+                        Add Task 
+                </Button>}
         </Box>
     );
 };
