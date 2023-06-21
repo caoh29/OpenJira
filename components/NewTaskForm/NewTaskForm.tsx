@@ -3,7 +3,7 @@ import { Button, OutlinedInput, Box, FormHelperText } from '@mui/material';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import AddIcon from '@mui/icons-material/Add';
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useStore } from "@/store/store";
 
@@ -15,8 +15,10 @@ type Inputs = {
 };
 
 export default function NewTaskForm() {
-    const [isAdding, setIsAdding] = useState(false);
+
     const addTask = useStore((state) => state.addTask);
+    const isAdding = useStore((state) => state.isAddingTask);
+    const setIsAdding = useStore((state) => state.setIsAddingTask);
 
     const { register, handleSubmit, reset, formState } = useForm<Inputs>();
     
