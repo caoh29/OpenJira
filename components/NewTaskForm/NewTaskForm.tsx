@@ -4,6 +4,10 @@ import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import AddIcon from '@mui/icons-material/Add';
 import { useState, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
+import { useStore } from "@/store/store";
+
+
 
 type Inputs = {
     title: string,
@@ -12,12 +16,21 @@ type Inputs = {
 
 export default function NewTaskForm() {
     const [isAdding, setIsAdding] = useState(false);
+    const addTask = useStore((state) => state.addTask);
 
     const { register, handleSubmit, reset, formState } = useForm<Inputs>();
+    
     const onSubmitForm: SubmitHandler<Inputs> = (data) => {
-        console.log(data);
+        addTask({
+            id: uuidv4(),
+            title: data.title,
+            description: data.description,
+            status: "pending",
+            date: Date.now().toString(),
+        });
         setIsAdding(false);
     };
+    
 
     useEffect(() => {
         if (formState.isSubmitSuccessful) {

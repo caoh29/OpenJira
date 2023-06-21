@@ -12,6 +12,9 @@ export default function TaskCard ({ task }: TaskCardProps) {
         >
             <CardActionArea>
                 <CardContent>
+                    <Typography sx={{ whiteSpace: 'pre-line' }}>{task.title}</Typography>
+                </CardContent>
+                <CardContent>
                     <Typography sx={{ whiteSpace: 'pre-line' }}>{task.description}</Typography>
                 </CardContent>
                 <CardActions sx={{ display: 'flex', justifyContent: 'end', paddingRight: 2 }}>

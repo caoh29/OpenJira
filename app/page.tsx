@@ -1,9 +1,7 @@
 "use client";
 
-import { useStore } from '@/store/store'
 import { Metadata } from 'next';
-import { Grid, Card, CardHeader, IconButton } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
+import { Grid, Card, CardHeader } from '@mui/material';
 import TaskList from '@/components/TaskList/TaskList';
 import NewTaskForm from '@/components/NewTaskForm/NewTaskForm';
 
