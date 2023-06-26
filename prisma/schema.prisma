@@ -8,5 +8,9 @@ datasource db {
 }
 
 model Tasks {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String
+  status      String @default("pending")
+  date        String
 }
