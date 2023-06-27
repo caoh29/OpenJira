@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import { v4 as uuidv4 } from "uuid";
 
 
 export interface Task {
@@ -32,29 +31,7 @@ export const useStore = create<{
         isSideBarOpen: false,
         isAddingTask: false,
         isDraggingTask: false,
-        tasks: [
-            {
-                id: uuidv4(),
-                title: "Task 1",
-                description: "Task 1 description",
-                status: "pending",
-                date: "some date 1"
-            },
-            {
-                id: uuidv4(),
-                title: "Task 2",
-                description: "Task 2 description",
-                status: "in-progress",
-                date: "some date 2"
-            },
-            {
-                id: uuidv4(),
-                title: "Task 3",
-                description: "Task 3 description",
-                status: "finished",
-                date: "some date 3"
-            },
-        ],
+        tasks: [],
 
         toggleDarkMode: () => set((state) => ({ isDarkMode: !state.isDarkMode })),
         toggleSideBar: () => set((state) => ({ isSideBarOpen: !state.isSideBarOpen })),
