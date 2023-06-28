@@ -1,19 +1,15 @@
+version: '3.1'
 services:
-  tasksdb:
-    image: mongo
-    container_name: tasks-database
-    ports:
-      - 27019:27017
-    volumes:
-      - ./mongo:/data/db
-  mongo_replica:
+  mongo:
     build: ./mongo_replica
     restart: always
     environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: password
-      MONGO_INITDB_ROOT_DATABASE: db_replica
+      MONGO_INITDB_ROOT_USERNAME: usuarioAdmin
+      MONGO_INITDB_ROOT_PASSWORD: contrasena
+      MONGO_INITDB_DATABASE: tasks
       MONGO_REPLICA_HOST: localhost
-      MONGO_REPLICA_PORT: "27017"
+      MONGO_REPLICA_PORT: 27017
     ports:
-      - 27018:27017
+      - '27017:27017'
+    volumes:
+      - ./mongo:/data/db
