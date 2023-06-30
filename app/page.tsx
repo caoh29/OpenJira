@@ -5,6 +5,7 @@ import { Grid, Card, CardHeader } from '@mui/material';
 import TaskList from '@/components/TaskList/TaskList';
 import NewTaskForm from '@/components/NewTaskForm/NewTaskForm';
 import { useStore } from '@/store/store';
+import { useEffect } from 'react';
 
 export const metadata:Metadata = {
   title: 'Home - OpenJira',
@@ -12,21 +13,30 @@ export const metadata:Metadata = {
 }
 
 export default async function Home() {
-  const res = await fetch('http://localhost:3000/api/getTasks');
 
-  if (!res.ok) {
-    throw new Error('Something went wrong!');
-  }
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch('http://localhost:3000/api/getTasks');
+        if (!res.ok) {
+          throw new Error('Something went wrong!');
+        }
+        const data = await res.json();
 
-  const data = await res.json();
+        useStore.setState({
+          isDarkMode: false,
+          isSideBarOpen: false,
+          isAddingTask: false,
+          isDraggingTask: false,
+          tasks: data,
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-  useStore.setState({
-    isDarkMode: false,
-    isSideBarOpen: false,
-    isAddingTask: false,
-    isDraggingTask: false,
-    tasks: data
-  });
+    fetchData();
+  }, []);
 
   return (
     <Grid container spacing={2}>
