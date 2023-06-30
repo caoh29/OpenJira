@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 const { PrismaClient } = require('@prisma/client');
 // import { PrismaClient } from '@prisma/client';
 
-export async function GET(request: Request) {
+export async function GET() {
     const tasks = await getTasks();
     return NextResponse.json(
         tasks,
