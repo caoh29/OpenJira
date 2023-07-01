@@ -4,7 +4,6 @@ import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import AddIcon from '@mui/icons-material/Add';
 import { useEffect } from "react";
-import { v4 as uuidv4 } from "uuid";
 import { useStore } from "@/store/store";
 
 
@@ -24,7 +23,6 @@ export default function NewTaskForm() {
     
     const onSubmitForm: SubmitHandler<Inputs> = (data) => {
         addTask({
-            id: uuidv4(),
             title: data.title,
             description: data.description,
             status: "pending",

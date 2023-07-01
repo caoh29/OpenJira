@@ -35,7 +35,24 @@ export const useStore = create<{
 
         toggleDarkMode: () => set((state) => ({ isDarkMode: !state.isDarkMode })),
         toggleSideBar: () => set((state) => ({ isSideBarOpen: !state.isSideBarOpen })),
-        addTask: (task) => set((state) => ({ tasks: [...state.tasks, task] })),
+        addTask: async (task) => {
+            try {
+                const res = await fetch('http://localhost:3000/api/postTask',{
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(task),
+                });
+                if (!res.ok) {
+                    throw new Error('Something went wrong!');
+                }
+                const data = await res.json();
+                set((state) => ({ tasks: [...state.tasks, data] }));
+            } catch (error) {
+                console.error(error);
+            }
+        },
         updateTask: (task) => set((state) => ({ tasks: state.tasks.map((t) => t.id === task.id ? task : t)})),
         setIsAddingTask: (isAddingTask) => set(({ isAddingTask })),
         startDraggingTask: () => set(({ isDraggingTask: true })),
