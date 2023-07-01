@@ -67,3 +67,37 @@ const updateTask = async (id: string, data: { title?: string, description?: stri
         await prisma.$disconnect();
     }
 };
+
+
+
+// GET REQUEST
+export async function GET(request: Request) {
+    const URL = request.url;
+    const id = URL.split('/').pop() ?? null;
+
+    if (!id || id.length !== 24) {
+        return NextResponse.json(
+            { message: "Invalid data" },
+            { status: 400, statusText: "Bad Request" }
+        );
+    }
+    try {
+        await prisma.$connect();
+        const existingTask: Task = await prisma.tasks.findUnique({ where: { id } });
+        if (!existingTask) {
+            return NextResponse.json(
+                { message: "Task not found" },
+                { status: 404, statusText: "Not Found" }
+            );
+        }
+        return NextResponse.json(
+            { ...existingTask },
+            { status: 200, statusText: "OK" }
+        );
+        
+    } catch (e) {
+        console.error(e);
+    } finally {
+        await prisma.$disconnect();
+    }
+}
