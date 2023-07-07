@@ -11,6 +11,7 @@ import { Status, useStore } from '@/store/store';
 import { useEffect, useState } from "react";
 
 import { useForm, SubmitHandler } from "react-hook-form";
+import { formatDate } from '@/utils/dateFormat';
 
 type Inputs = {
     description: string,
@@ -97,7 +98,7 @@ export default function Task({ params }:{params: {id: string}}) {
         >
             <Grid item xs={12} sm={8} md={6} lg={4}>
                 <Card>
-                    <CardHeader title={taskTitleValue} subheader={`Created ${taskDate} minutes ago`}/>
+                    <CardHeader title={taskTitleValue} subheader={`Created ${formatDate(taskDate)}`}/>
                     <CardContent >
                         <form onSubmit={handleSubmit(onSubmitForm)}>
                             <TextField

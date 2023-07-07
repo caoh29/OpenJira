@@ -2,6 +2,7 @@ import { Task, useStore } from '@/store/store';
 import { Card, CardActionArea, CardActions, CardContent, Typography } from '@mui/material';
 import { DragEvent } from 'react';
 import { useRouter } from 'next/navigation'
+import { formatDate } from '@/utils/dateFormat';
 
 interface TaskCardProps {
     task: Task;
@@ -44,7 +45,7 @@ export default function TaskCard ({ task }: TaskCardProps) {
                     <Typography sx={{ whiteSpace: 'pre-line' }}>{task.description}</Typography>
                 </CardContent>
                 <CardActions sx={{ display: 'flex', justifyContent: 'end', paddingRight: 2 }}>
-                    <Typography variant='body2'>{task.date}</Typography>
+                    <Typography variant='body2'>{formatDate(task.date)}</Typography>
                 </CardActions>
             </CardActionArea>
         </Card>
