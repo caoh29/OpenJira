@@ -1,6 +1,7 @@
 import { Task, useStore } from '@/store/store';
 import { Card, CardActionArea, CardActions, CardContent, Typography } from '@mui/material';
 import { DragEvent } from 'react';
+import { useRouter } from 'next/navigation'
 
 interface TaskCardProps {
     task: Task;
@@ -8,18 +9,24 @@ interface TaskCardProps {
 
 export default function TaskCard ({ task }: TaskCardProps) {
 
+    const router = useRouter();
+
     const startDraggingTask = useStore((state) => state.startDraggingTask);
     const endDraggingTask = useStore((state) => state.endDraggingTask);
 
     const onDragStart = (event: DragEvent) => {
-        event.dataTransfer.setData('text/plain', task.id);
+        event.dataTransfer.setData('text/plain', task.id!);
         startDraggingTask();
     };
 
     const onDragEnd = (event: DragEvent) => {
         endDraggingTask();
     };
+    
 
+    const onCardClick = () => {
+        router.push(`/tasks/${task.id}`);
+    }
 
     return (
         <Card
@@ -27,6 +34,7 @@ export default function TaskCard ({ task }: TaskCardProps) {
             draggable
             onDragStart={ onDragStart }
             onDragEnd={ onDragEnd }
+            onClick={ onCardClick }
         >
             <CardActionArea>
                 <CardContent>
