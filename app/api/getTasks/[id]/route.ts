@@ -101,3 +101,35 @@ export async function GET(request: Request) {
         await prisma.$disconnect();
     }
 }
+
+// DELETE REQUEST
+export async function DELETE(request: Request) {
+    const URL = request.url;
+    const id = URL.split('/').pop() ?? null;
+
+    if (!id || id.length !== 24) {
+        return NextResponse.json(
+            { message: "Invalid data" },
+            { status: 400, statusText: "Bad Request" }
+        );
+    }
+    try {
+        await prisma.$connect();
+        const response = await prisma.tasks.delete({ where: { id } });
+        if (!response) {
+            return NextResponse.json(
+                { message: "Task not found" },
+                { status: 404, statusText: "Not Found" }
+            );
+        }
+        return NextResponse.json(
+            { ...response },
+            { status: 200, statusText: "OK" }
+        );
+        
+    } catch (e) {
+        console.error(e);
+    } finally {
+        await prisma.$disconnect();
+    }
+}
