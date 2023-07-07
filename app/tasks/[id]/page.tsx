@@ -68,27 +68,6 @@ export default function Task({ params }:{params: {id: string}}) {
         }
     }, [formState.isSubmitSuccessful]);
 
-    const onDeleteTask = async () => {
-        try {
-            const res = await fetch(`http://localhost:3000/api/getTasks/${params.id}`,{
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    id: params.id,
-                })
-            });
-            if (!res.ok) {
-                throw new Error('Something went wrong!');
-            }
-        } catch (error) {
-            console.error(error);
-        } finally {
-            router.push(`/`);
-        }
-    }
-
 
     return (
         <Grid
@@ -137,7 +116,6 @@ export default function Task({ params }:{params: {id: string}}) {
                 </Card>
             </Grid>
             <IconButton
-                onClick={onDeleteTask}
                 sx={{
                     position: 'fixed',
                     bottom: '2rem',
