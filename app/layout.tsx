@@ -1,11 +1,12 @@
 "use client";
 
-import './globals.css'
+import './globals.css';
 
-import Head from 'next/head'
-import { Inter } from 'next/font/google'
+import Head from 'next/head';
+import { Inter } from 'next/font/google';
 
-import { ThemeProvider, Box } from '@mui/material'
+import { ThemeProvider, Box } from '@mui/material';
+import CssBaseline from '@mui/material/CssBaseline';
 import { lightTheme, darkTheme } from '../themes'
 import NavBar from '@/components/NavBar/NavBar';
 import SideBar from '@/components/SideBar/SideBar';
@@ -40,6 +41,7 @@ export default function RootLayout({
       </Head>
       <body className={inter.className}>
         <ThemeProvider theme={ getTheme() }>
+          <CssBaseline />
           <Box sx={{ flexFlow: 1 }}>
             <NavBar/>
             <SideBar/>
